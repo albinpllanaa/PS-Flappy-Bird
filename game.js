@@ -1,8 +1,19 @@
+window.onload = function () {
+  // Check the Referer header
+  var referrer = document.referrer;
+
+  // Check if the referrer is your desired website
+  var yourWebsiteURL = "alertmeterstagingcentralus.cloudapp.net"; // Replace with your website URL
+  if (referrer.indexOf(yourWebsiteURL) === 0) {
+    alert("You have completed the Alertmeter!");
+  }
+};
+
 const RAD = Math.PI / 180;
 const scrn = document.getElementById("canvas");
 const sctx = scrn.getContext("2d");
 scrn.tabIndex = 1;
-scrn.addEventListener("click", () => {
+scrn.addEventListener("click", (event) => {
   switch (state.curr) {
     case state.getReady:
       state.curr = state.Play;
@@ -18,6 +29,31 @@ scrn.addEventListener("click", () => {
       pipe.pipes = [];
       UI.score.curr = 0;
       SFX.played = false;
+      var x = event.clientX - canvas.getBoundingClientRect().left;
+      var y = event.clientY - canvas.getBoundingClientRect().top;
+      console.log(x, y);
+      if (
+        x >= UI.ax &&
+        x <= UI.ax + UI.alertmeter.sprite.width &&
+        y >= UI.ay &&
+        y <= UI.ay + UI.alertmeter.sprite.width
+      ) {
+        let host = "http://alertmeterstagingcentralus.cloudapp.net";
+        let companyId = "PredictiveSafety";
+        let username = "123456";
+        let password = "password";
+        let returnUrl = "https://albinpllanaa.github.io/PS-Flappy-Bird";
+        window.location.href =
+          host +
+          "/Test/Account/ExternalLogin?CompanyId=" +
+          companyId +
+          "&username=" +
+          username +
+          "&password=" +
+          password +
+          "&returnUrl=" +
+          returnUrl;
+      }
       break;
   }
 });
@@ -219,6 +255,7 @@ const bird = {
 const UI = {
   getReady: { sprite: new Image() },
   gameOver: { sprite: new Image() },
+  alertmeter: { sprite: new Image() },
   tap: [{ sprite: new Image() }, { sprite: new Image() }],
   score: {
     curr: 0,
@@ -228,6 +265,8 @@ const UI = {
   y: 0,
   tx: 0,
   ty: 0,
+  ax: 0,
+  ay: 0,
   frame: 0,
   draw: function () {
     switch (state.curr) {
@@ -246,8 +285,11 @@ const UI = {
         this.tx = parseFloat(scrn.width - this.tap[0].sprite.width) / 2;
         this.ty =
           this.y + this.gameOver.sprite.height - this.tap[0].sprite.height;
+        this.ax = parseFloat(scrn.width - 50) / 2;
+        this.ay = this.ty + this.tap[0].sprite.height * 2;
         sctx.drawImage(this.gameOver.sprite, this.x, this.y);
         sctx.drawImage(this.tap[this.frame].sprite, this.tx, this.ty);
+        sctx.drawImage(this.alertmeter.sprite, this.ax, this.ay, 50, 50);
         break;
     }
     this.drawScore();
@@ -298,6 +340,7 @@ pipe.top.sprite.src = "img/toppipe.png";
 pipe.bot.sprite.src = "img/botpipe.png";
 UI.gameOver.sprite.src = "img/go.png";
 UI.getReady.sprite.src = "img/getready.png";
+UI.alertmeter.sprite.src = "img/tap/alertmeter.png";
 UI.tap[0].sprite.src = "img/tap/t0.png";
 UI.tap[1].sprite.src = "img/tap/t1.png";
 bird.animations[0].sprite.src = "img/bird/b0.png";
