@@ -3,11 +3,34 @@ window.onload = function () {
   var referrer = document.referrer;
 
   // Check if the referrer is your desired website
-  var yourWebsiteURL = "alertmeterstagingcentralus.cloudapp.net"; // Replace with your website URL
+  var yourWebsiteURL = "http://alertmeterstagingcentralus.cloudapp.net/"; // Replace with alertmeter host
   if (referrer.indexOf(yourWebsiteURL) === 0) {
     alert("You have completed the Alertmeter!");
   }
 };
+
+function openAlertmeter() {
+  let host = "http://alertmeterstagingcentralus.cloudapp.net";
+  //This is the company id that you get from Alertmeter host
+  let companyId = "PredictiveSafety";
+  //This is the username of your account
+  let username = "123456";
+  //This is the password of your account
+  let password = "password";
+  //This is the url that you will be returned to when you have completed the test
+  let returnUrl = "https://albinpllanaa.github.io/PS-Flappy-Bird";
+  //Construct the url using the format below and the window.location.href will redirect you to the alertmeter
+  window.location.href =
+    host +
+    "/Test/Account/ExternalLogin?CompanyId=" +
+    companyId +
+    "&username=" +
+    username +
+    "&password=" +
+    password +
+    "&returnUrl=" +
+    returnUrl;
+}
 
 const RAD = Math.PI / 180;
 const scrn = document.getElementById("canvas");
@@ -38,21 +61,7 @@ scrn.addEventListener("click", (event) => {
         y >= UI.ay &&
         y <= UI.ay + UI.alertmeter.sprite.width
       ) {
-        let host = "http://alertmeterstagingcentralus.cloudapp.net";
-        let companyId = "PredictiveSafety";
-        let username = "123456";
-        let password = "password";
-        let returnUrl = "https://albinpllanaa.github.io/PS-Flappy-Bird";
-        window.location.href =
-          host +
-          "/Test/Account/ExternalLogin?CompanyId=" +
-          companyId +
-          "&username=" +
-          username +
-          "&password=" +
-          password +
-          "&returnUrl=" +
-          returnUrl;
+        openAlertmeter();
       }
       break;
   }
