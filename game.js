@@ -54,7 +54,6 @@ scrn.addEventListener("click", (event) => {
       SFX.played = false;
       var x = event.clientX - canvas.getBoundingClientRect().left;
       var y = event.clientY - canvas.getBoundingClientRect().top;
-      console.log(x, y);
       if (
         x >= UI.ax &&
         x <= UI.ax + UI.alertmeter.sprite.width &&
