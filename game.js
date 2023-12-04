@@ -22,7 +22,7 @@ function openAlertmeter() {
   //Construct the url using the format below and the window.location.href will redirect you to the alertmeter
   window.location.href =
     host +
-    "/Test/Account/ExternalLogin?CompanyId=" +
+    "/Test/Account/Start_Alertmeter?CompanyId=" +
     companyId +
     "&username=" +
     username +
