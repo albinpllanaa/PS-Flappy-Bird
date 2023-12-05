@@ -5,7 +5,16 @@ window.onload = function () {
   // Check if the referrer is your desired website
   var yourWebsiteURL = "http://alertmeterstagingcentralus.cloudapp.net/"; // Replace with alertmeter host
   if (referrer.indexOf(yourWebsiteURL) === 0) {
-    alert("You have completed the Alertmeter!");
+    const searchParams = new URLSearchParams(window.location.search);
+    alert(
+      "You have completed the Alertmeter!" +
+        "\nStatus: " +
+        searchParams.get("deepLinkingStatus") +
+        "\nImpairmentStatus: " +
+        searchParams.get("status") +
+        "\nImpairmentAbortReason: " +
+        searchParams.get("impairmentAbortReason")
+    );
   }
 };
 
