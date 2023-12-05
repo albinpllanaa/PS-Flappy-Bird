@@ -8,7 +8,7 @@ window.onload = function () {
     const searchParams = new URLSearchParams(window.location.search);
     alert(
       "You have completed the Alertmeter!" +
-        "\nStatus: " +
+        "\nDeeplinking Status: " +
         searchParams.get("deepLinkingStatus") +
         "\nImpairmentStatus: " +
         searchParams.get("status") +
